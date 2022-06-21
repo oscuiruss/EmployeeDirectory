@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+
+<p th:text=" ${employee.getSurname()} + ' ' + ${employee.getName()} + ' ' + ${employee.getPatronymic()}">
+    VALUE</p>
+<p  th:text=" 'ID: ' + ${employee.getId()}">VALUE</p>
+<p  th:text=" 'email: ' + ${employee.getEmail()}">VALUE</p>
+<a th:href="@{/employees/{id}/edit(id=${employee.getId()})}">Edit</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/employees/delete/{id}(id=${employee.getId()})}">Delete</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/employees}">All employees</a>
+
+</body>
+</html>

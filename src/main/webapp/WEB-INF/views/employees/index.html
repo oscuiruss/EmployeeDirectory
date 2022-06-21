@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Start page</title>
+</head>
+<body>
+
+<form th:action="@{/employees}" th:method="GET">
+    <div style="text-align: center;">
+        Search: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
+        <input type="submit" value="Search"/>&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/employees/new}">Add new employee</a>
+    </div>
+</form>
+<div style="text-align: center;">
+    <div th:each="employee : ${employees}">
+        <a th:href="@{/employees/{id}(id=${employee.getId()})}" th:text="${employee.getSurname()} + ' ' + ${employee.getName()} + ' ' + ${employee.getPatronymic()}">user</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/employees/{id}/edit(id=${employee.getId()})}">Edit</a>
+        &nbsp;&nbsp;&nbsp;
+        <a  th:href="@{/employees/delete/{id}(id=${employee.getId()})}">Delete</a>
+    </div>
+</div>
+
+</body>
+</html>
