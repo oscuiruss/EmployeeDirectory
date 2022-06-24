@@ -1,6 +1,9 @@
 package com.app.controllers;
 
+import antlr.debug.DebuggingParser;
+import com.app.dao.DepartmentDAO;
 import com.app.dao.EmployeeDAO;
+import com.app.dao.SectionDAO;
 import com.app.models.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +17,14 @@ import javax.validation.Valid;
 @RequestMapping("/employees")
 public class EmployeeController {
     private final EmployeeDAO employeeDAO;
+    private final SectionDAO sectionDAO;
+    private final DepartmentDAO departmentDAO;
 
     @Autowired
-    EmployeeController(EmployeeDAO employeeDAO) {
+    EmployeeController(EmployeeDAO employeeDAO, SectionDAO sectionDAO, DepartmentDAO departmentDAO) {
         this.employeeDAO = employeeDAO;
+        this.sectionDAO = sectionDAO;
+        this.departmentDAO = departmentDAO;
     }
 
     @GetMapping()
@@ -51,6 +58,8 @@ public class EmployeeController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("employee", employeeDAO.show(id));
+        model.addAttribute("departments",departmentDAO.index(""));
+        model.addAttribute("sections",sectionDAO.index(""));
         return "employees/edit";
     }
 

@@ -8,16 +8,28 @@
 
 <form th:action="@{/employees/create}" th:object="${employee}" th:method="POST">
     <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/> <br>
-    <label for="patronymic">Enter patronymic: </label>
-    <input type="text" th:field="*{patronymic}" id="patronymic"/><br>
-    <label for="surname">Enter surname: </label>
-    <input type="text" th:field="*{surname}" id="surname"/><br>
-    <label for="email">Enter email: </label>
-    <input type="text" th:field="*{email}" id="email"/><br>
+    <input type="text" th:field="*{name}" id="name"/>
     <br/>
-    <input type="submit" value="Create!"/>
+    <label for="patronymic">Enter patronymic: </label>
+    <input type="text" th:field="*{patronymic}" id="patronymic"/>
+    <br/>
+    <label for="surname">Enter surname: </label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <br/>
+    <label for="post">Enter post: </label>
+    <input type="text" th:field="*{post}" id="post"/>
+    <br/>
+    <label for="section.department.name">Enter department: </label>
+    <input type="text" th:field="*{section.department.name}" id="section.department.name"/>
+    <br/>
+    <label for="section.name">Enter section: </label>
+    <input type="text" th:field="*{section.name}" id="section.name"/>
+    <input type="submit" value="Save"/>
 </form>
+<a th:href="@{/employees/new}">Add new employee</a>
 
 </body>
 </html>

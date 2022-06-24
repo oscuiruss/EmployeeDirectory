@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show sections</title>
+</head>
+<body>
+<form th:action="@{/sections}" th:method="GET">
+    <div style="text-align: center;">
+        Search: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}"/>
+        <input type="submit" value="Search"/>&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/sections/new}">Add new section</a>
+    </div>
+</form>
+<div style="text-align: center;">
+    <div th:each="section : ${sections}">
+        <a th:href="@{/sections/{id}(id=${section.getId()})}" th:text="${section.getName()}">Section</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/sections/{id}/edit(id=${section.getId()})}">Edit</a>
+        &nbsp;&nbsp;&nbsp;
+        <a  th:href="@{/sections/delete/{id}(id=${section.getId()})}">Delete</a>
+    </div>
+</div>
+</body>
+</html>

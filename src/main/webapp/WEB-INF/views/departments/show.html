@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show department</title>
+
+</head>
+<body>
+<p th:text=" ${department.getName()}">
+    VALUE</p>
+<p  th:text=" 'ID: ' + ${department.getId()}">VALUE</p>
+<p  th:text=" 'Director: ' + ${department.getDirector().getName()}">VALUE</p>
+<!--<p  th:text=" 'Section: ' + ${employee.getSection().getName()}">VALUE</p>-->
+<a th:href="@{/departments/{id}/edit(id=${department.getId()})}">Edit</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/departments/delete/{id}(id=${department.getId()})}">Delete</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/departments}">All departments</a>
+</body>
+</html>

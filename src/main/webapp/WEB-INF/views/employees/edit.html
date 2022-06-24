@@ -7,23 +7,41 @@
 <body>
 
 <form th:method="PATCH" th:action="@{/employees/{id}(id=${employee.getId()})}" th:object="${employee}">
-    <label for="name">Enter name: </label>
+    <label for="name">Name: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <br/>
-    <label for="patronymic">Enter patronymic: </label>
+    <label for="patronymic">Patronymic: </label>
     <input type="text" th:field="*{patronymic}" id="patronymic"/>
     <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">Patronymic Error</div>
     <br/>
-    <label for="surname">Enter surname: </label>
+    <label for="surname">Surname: </label>
     <input type="text" th:field="*{surname}" id="surname"/>
     <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
     <br/>
-    <label for="email">Enter email: </label>
+    <label for="email">email: </label>
     <input type="text" th:field="*{email}" id="email"/>
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
     <br/>
-    <input type="submit" value="Update!"/>
+    <label for="post">Post: </label>
+    <input type="text" th:field="*{post}" id="post"/>
+    <div style="color:red" th:if="${#fields.hasErrors('post')}" th:errors="*{post}">Post Error</div>
+    <br/>
+    <label for="section.department.name">Department: </label>
+    <select th:field="*{section.department.name}" id="section.department.name">
+        <option th:each="dep : ${departments}"
+                th:text="${dep.name}"
+                th:value="${dep.id}">
+    </select>
+    <br/>
+    <label for="section.name">Section: </label>
+    <select th:field="*{section.name}" id="section.name">
+        <option th:each="sec : ${sections}"
+                th:text="${sec.name}"
+                th:value="${sec.id}">
+    </select>
+
+    <input type="submit" value="Save"/>
 </form>
 
 </body>

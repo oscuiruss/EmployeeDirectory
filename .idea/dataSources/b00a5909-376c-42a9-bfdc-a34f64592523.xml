@@ -794,9 +794,11 @@ false Zulu
     <database id="3" parent="1" name="employees">
       <ObjectId>16404</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>867</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1072</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16405|16406|1
+sequence|table|16428|16429|1
+sequence|table|16442|16443|1
 </Relations>
     </database>
     <database id="4" parent="1" name="employess">
@@ -886,7 +888,7 @@ UC/10
 </Acl>
       <StateNumber>527</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>868</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1073</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="23" parent="3" name="plpgsql">
@@ -992,102 +994,229 @@ UC/10
       <StateNumber>861</StateNumber>
       <DataType>bigint|0s</DataType>
     </sequence>
-    <sequence id="36" parent="22" name="employees_id_seq">
+    <sequence id="36" parent="22" name="departments_dep_id_seq">
+      <ObjectId>16428</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>920</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <sequence id="37" parent="22" name="employees_id_seq">
       <ObjectId>16405</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>844</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
-    <table id="37" parent="22" name="employees">
+    <sequence id="38" parent="22" name="sections_sec_id_seq">
+      <ObjectId>16442</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>962</StateNumber>
+      <DataType>integer|0s</DataType>
+    </sequence>
+    <table id="39" parent="22" name="departments">
+      <ObjectId>16429</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>981</StateNumber>
+    </table>
+    <table id="40" parent="22" name="employees">
       <ObjectId>16406</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>844</StateNumber>
+      <StateNumber>977</StateNumber>
     </table>
-    <table id="38" parent="22" name="employees1">
-      <ObjectId>16412</ObjectId>
+    <table id="41" parent="22" name="sections">
+      <ObjectId>16443</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>866</StateNumber>
+      <StateNumber>987</StateNumber>
     </table>
-    <column id="39" parent="37" name="id">
+    <column id="42" parent="39" name="dep_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>844</StateNumber>
+      <StateNumber>920</StateNumber>
       <TypeId>23</TypeId>
       <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="40" parent="37" name="name">
+    <column id="43" parent="39" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
-      <StateNumber>844</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>1032</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="41" parent="37" name="patronymic">
-      <Position>3</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>844</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="42" parent="37" name="surname">
+    <column id="44" parent="39" name="dir_id">
       <Position>4</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>844</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>integer|0s</DataType>
+      <StateNumber>981</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="43" parent="37" name="email">
-      <Position>5</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>844</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="44" parent="37" name="employees_pkey">
-      <ObjectId>16409</ObjectId>
-      <StateNumber>844</StateNumber>
-      <ColNames>id</ColNames>
+    <index id="45" parent="39" name="departments_pkey">
+      <ObjectId>16432</ObjectId>
+      <StateNumber>920</StateNumber>
+      <ColNames>dep_id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
       <AccessMethodId>403</AccessMethodId>
       <CollationIds>0</CollationIds>
       <ClassIds>1978</ClassIds>
     </index>
-    <key id="45" parent="37" name="employees_pkey">
+    <key id="46" parent="39" name="departments_pkey">
+      <ObjectId>16433</ObjectId>
+      <StateNumber>920</StateNumber>
+      <ColNames>dep_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>departments_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="47" parent="39" name="departments_dir___fk">
+      <ObjectId>16458</ObjectId>
+      <StateNumber>984</StateNumber>
+      <ColNames>dir_id</ColNames>
+      <RefTableId>16406</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>employees</RefTableName>
+      <RefKeyName>employees_pkey</RefKeyName>
+      <RefColNames>em_id</RefColNames>
+    </foreign-key>
+    <column id="48" parent="40" name="em_id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>904</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
+    </column>
+    <column id="49" parent="40" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1048</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="50" parent="40" name="patronymic">
+      <Position>3</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1054</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="51" parent="40" name="surname">
+      <Position>4</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1051</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="52" parent="40" name="email">
+      <Position>5</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1057</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="53" parent="40" name="sec_id">
+      <Position>6</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1063</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="54" parent="40" name="post">
+      <Position>8</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1060</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="55" parent="40" name="employees_pkey">
+      <ObjectId>16409</ObjectId>
+      <StateNumber>844</StateNumber>
+      <ColNames>em_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="56" parent="40" name="employees_pkey">
       <ObjectId>16410</ObjectId>
       <StateNumber>844</StateNumber>
-      <ColNames>id</ColNames>
+      <ColNames>em_id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>employees_pkey</UnderlyingIndexName>
     </key>
-    <column id="46" parent="38" name="country_id">
+    <foreign-key id="57" parent="40" name="section_ibfk_1">
+      <ObjectId>16453</ObjectId>
+      <StateNumber>966</StateNumber>
+      <ColNames>sec_id</ColNames>
+      <RefTableId>16443</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>sections</RefTableName>
+      <RefKeyName>sections_pkey</RefKeyName>
+      <RefColNames>sec_id</RefColNames>
+    </foreign-key>
+    <column id="58" parent="41" name="sec_id">
       <Position>1</Position>
-      <DataType>bigint|0s</DataType>
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>866</StateNumber>
-      <DefaultExpression>nextval(&apos;id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>20</TypeId>
+      <StateNumber>962</StateNumber>
+      <TypeId>23</TypeId>
+      <IdentityKind>by-default</IdentityKind>
     </column>
-    <column id="47" parent="38" name="name">
+    <column id="59" parent="41" name="name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
-      <StateNumber>866</StateNumber>
+      <NotNull>1</NotNull>
+      <StateNumber>1066</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="38" name="patronymic">
+    <column id="60" parent="41" name="dep_id">
       <Position>3</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>866</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>962</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="49" parent="38" name="surname">
+    <column id="61" parent="41" name="dir_id">
       <Position>4</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>866</StateNumber>
-      <TypeId>1043</TypeId>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1069</StateNumber>
+      <TypeId>23</TypeId>
     </column>
-    <column id="50" parent="38" name="email">
-      <Position>5</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <StateNumber>866</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
+    <index id="62" parent="41" name="sections_pkey">
+      <ObjectId>16446</ObjectId>
+      <StateNumber>962</StateNumber>
+      <ColNames>sec_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationIds>0</CollationIds>
+      <ClassIds>1978</ClassIds>
+    </index>
+    <key id="63" parent="41" name="sections_pkey">
+      <ObjectId>16447</ObjectId>
+      <StateNumber>962</StateNumber>
+      <ColNames>sec_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sections_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="64" parent="41" name="department_ibfk_1">
+      <ObjectId>16448</ObjectId>
+      <StateNumber>962</StateNumber>
+      <ColNames>dep_id</ColNames>
+      <RefTableId>16429</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>departments</RefTableName>
+      <RefKeyName>departments_pkey</RefKeyName>
+      <RefColNames>dep_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="65" parent="41" name="sections_dir___fk">
+      <ObjectId>16463</ObjectId>
+      <StateNumber>990</StateNumber>
+      <ColNames>dir_id</ColNames>
+      <RefTableId>16406</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>employees</RefTableName>
+      <RefKeyName>employees_pkey</RefKeyName>
+      <RefColNames>em_id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

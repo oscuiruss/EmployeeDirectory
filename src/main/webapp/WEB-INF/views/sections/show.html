@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show section</title>
+</head>
+<body>
+<p th:text=" ${section.getName()}">
+    VALUE</p>
+<p  th:text=" 'ID: ' + ${section.getId()}">VALUE</p>
+<p  th:text=" 'Department: ' + ${section.getDepartment().getName()}">VALUE</p>
+<!--<p  th:text=" 'Section: ' + ${employee.getSection().getName()}">VALUE</p>-->
+<a th:href="@{/sections/{id}/edit(id=${section.getId()})}">Edit</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/sections/delete/{id}(id=${section.getId()})}">Delete</a>
+&nbsp;&nbsp;&nbsp;
+<a  th:href="@{/sections}">All sections</a>
+</body>
+</html>

@@ -10,6 +10,9 @@
     VALUE</p>
 <p  th:text=" 'ID: ' + ${employee.getId()}">VALUE</p>
 <p  th:text=" 'email: ' + ${employee.getEmail()}">VALUE</p>
+<p  th:text=" 'Post: ' + ${employee.getPost()}">VALUE</p>
+<p  th:text=" 'Department: ' + ${employee.getDepartment().getName()}">VALUE</p>
+<p  th:text=" 'Section: ' + ${employee.getSection().getName()}">VALUE</p>
 <a th:href="@{/employees/{id}/edit(id=${employee.getId()})}">Edit</a>
 &nbsp;&nbsp;&nbsp;
 <a  th:href="@{/employees/delete/{id}(id=${employee.getId()})}">Delete</a>

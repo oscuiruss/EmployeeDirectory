@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 @Table(name = "employees")
 public class Employee {
     @Id
-    @Column(name = "id")
+    @Column(name = "em_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -36,10 +36,12 @@ public class Employee {
     @Email
     private String email;
 
-//    private String department;
-//
-//
-//    private String section;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "sec_id")
+    private Section section;
+
+    @Column(name = "post")
+    private String post;
 
     public Employee() {
 
@@ -53,12 +55,20 @@ public class Employee {
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public String getPost() {
+        return post;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -93,21 +103,19 @@ public class Employee {
         this.email = email;
     }
 
-//    public String getDepartment() {
-//        return department;
-//    }
-//
-//    public void setDepartment(String department) {
-//        this.department = department;
-//    }
-//
-//    public String getSection() {
-//        return section;
-//    }
-//
-//    public void setSection(String section) {
-//        this.section = section;
-//    }
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Department getDepartment() {
+        System.out.println(section.getDepartment().getName());
+        return section.getDepartment();
+    }
+
 
     @Override
     public String toString() {
@@ -117,8 +125,8 @@ public class Employee {
                 ", patronymic='" + patronymic + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-//                ", department='" + department + '\'' +
-//                ", section='" + section + '\'' +
+                ", department='" + section.getDepartment().getName() + '\'' +
+                ", section='" + section.getName() + '\'' +
                 '}';
     }
 }

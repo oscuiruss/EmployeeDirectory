@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit department</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/departments/{id}(id=${department.getId()})}" th:object="${department}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+    <br/>
+    <label for="director.name">Director: </label>
+    <select th:field="*{director.name}" id="director.name">
+        <option th:each="em : ${employees}"
+                th:text="${em.surname} + ' ' + ${em.name} + ' ' + ${em.patronymic} "
+                th:value="${em.id}">
+    </select>
+    <br/>
+
+    <input type="submit" value="Save"/>
+</form>
+</body>
+</body>
+</html>

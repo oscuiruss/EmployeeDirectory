@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New section</title>
+</head>
+<body>
+
+<form th:action="@{/sections/create}" th:object="${section}" th:method="POST">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="department.name">Enter department: </label>
+    <input type="text" th:field="*{department.name}" id="department.name"/>
+    <br/>
+    <input type="submit" value="Save"/>
+</form>
+<a th:href="@{/sections/new}">Add new section</a>
+
+</body>
+</html>

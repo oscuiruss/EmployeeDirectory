@@ -1,13 +1,12 @@
 package com.app.dao;
 
+import com.app.models.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-
 import org.springframework.stereotype.Component;
-import com.app.models.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -17,8 +16,8 @@ import java.util.List;
 
 @Component
 @Repository
-//@EnableAutoConfiguration(exclude= {HibernateJpaAutoConfiguration.class})
 public class EmployeeDAO {
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -29,6 +28,7 @@ public class EmployeeDAO {
 
     @Transactional
     public List<Employee> index(String keyword) {
+        logger.debug("8");
         Session session = sessionFactory.getCurrentSession();
         Query query;
         if (keyword != null) {
@@ -61,6 +61,8 @@ public class EmployeeDAO {
         personToBeUpdated.setPatronymic(updatedPerson.getPatronymic());
         personToBeUpdated.setSurname(updatedPerson.getSurname());
         personToBeUpdated.setEmail(updatedPerson.getEmail());
+        personToBeUpdated.setSection(updatedPerson.getSection());
+        personToBeUpdated.setPost(updatedPerson.getPost());
     }
 
     @Transactional
