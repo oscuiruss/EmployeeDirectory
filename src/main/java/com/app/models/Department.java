@@ -4,23 +4,23 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
-@Table(name = "departments")
+@Table
 public class Department {
     @Id
-    @Column(name = "dep_id")
+//    @Column(name = "dep_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name = "sec_id")
+    @OneToMany(cascade=ALL, mappedBy="department")
     private List<Section> sections = new ArrayList<>();
 
-
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=ALL)
     @JoinColumn(name = "dir_id")
     private Employee director;
 
@@ -64,4 +64,12 @@ public class Department {
         return director;
     }
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", director=" + director.getName() +
+                '}';
+    }
 }

@@ -1,10 +1,11 @@
 package com.app.controllers;
 
 import antlr.debug.DebuggingParser;
-import com.app.dao.DepartmentDAO;
-import com.app.dao.EmployeeDAO;
-import com.app.dao.SectionDAO;
+//import com.app.dao.DepartmentDAO;
+//import com.app.dao.EmployeeDAO;
+//import com.app.dao.SectionDAO;
 import com.app.models.Employee;
+import com.app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +17,19 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
-    private final EmployeeDAO employeeDAO;
-    private final SectionDAO sectionDAO;
-    private final DepartmentDAO departmentDAO;
+//    private final EmployeeDAO employeeDAO;
+    private final EmployeeService employeeService;
+//    private final SectionDAO sectionDAO;
+//    private final DepartmentDAO departmentDAO;
 
     @Autowired
-    EmployeeController(EmployeeDAO employeeDAO, SectionDAO sectionDAO, DepartmentDAO departmentDAO) {
-        this.employeeDAO = employeeDAO;
-        this.sectionDAO = sectionDAO;
-        this.departmentDAO = departmentDAO;
+    EmployeeController( EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping()
     public String index(Model model, @RequestParam(required = false) String keyword) {
-        model.addAttribute("employees", employeeDAO.index(keyword));
+        model.addAttribute("employees", employeeService.findEmployeeByKeyWord(keyword));
         model.addAttribute("keyword", keyword);
         return "employees/index";
     }
@@ -41,7 +41,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("employee", employeeDAO.show(id));
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
         return "employees/show";
     }
 
@@ -51,15 +51,15 @@ public class EmployeeController {
         System.out.println(employee.toString());
         if (bindingResult.hasErrors())
             return "employees/new";
-        employeeDAO.save(employee);
+        employeeService.save(employee);
         return "redirect:/employees/" + employee.getId();
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("employee", employeeDAO.show(id));
-        model.addAttribute("departments",departmentDAO.index(""));
-        model.addAttribute("sections",sectionDAO.index(""));
+        model.addAttribute("employee", employeeService.findEmployeeById(id));
+//        model.addAttribute("departments",departmentDAO.index(""));
+//        model.addAttribute("sections",sectionDAO.index(""));
         return "employees/edit";
     }
 
@@ -69,13 +69,13 @@ public class EmployeeController {
         if (bindingResult.hasErrors()) {
             return "employees/edit";
         }
-        employeeDAO.update(id, employee);
+        employeeService.update(id, employee);
         return "redirect:/employees/{id}";
     }
 
     @GetMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") int id) {
-        employeeDAO.delete(id);
+        employeeService.delete(id);
         return "redirect:/employees";
     }
 }

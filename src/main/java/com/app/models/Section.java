@@ -1,31 +1,34 @@
 package com.app.models;
 
+
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
-@Table(name = "sections")
+@Table
 public class Section {
     @Id
-    @Column(name = "sec_id")
+//    @Column(name = "sec_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "dep_id")
+    @ManyToOne
+    @JoinColumn(name = "dep_id", nullable = false)
     Department department;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "em_id")
+    @OneToMany(mappedBy = "section", cascade = ALL)
     private List<Employee> employees = new ArrayList<>();
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dir_id")
+    @OneToOne(cascade = ALL)
+
     private Employee director;
 
     public Section(String name) {

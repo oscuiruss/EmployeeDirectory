@@ -1,46 +1,49 @@
 package com.app.models;
 
+import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "employees")
+@Table
 public class Employee {
     @Id
-    @Column(name = "em_id")
+//    @Column(name = "em_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotEmpty(message = "Name can't be empty")
     @Size(min = 2, max = 20, message = "Name can't consist of less than 2 and more than 20 letters")
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
 
     @NotEmpty(message = "Patronymic can't be empty")
     @Size(min = 2, max = 20, message = "Patronymic can't consist of less than 2 and more than 20 letters")
-    @Column(name = "patronymic")
+//    @Column(name = "patronymic")
     private String patronymic;
 
 
     @NotEmpty(message = "Surname can't be empty")
     @Size(min = 2, max = 20, message = "Name can't consist of less than 2 and more than 20 letters")
-    @Column(name = "surname")
+//    @Column(name = "surname")
     private String surname;
 
 
-    @Column(name = "email")
+//    @Column(name = "email")
     @NotEmpty(message = "Email can't be empty")
     @Email
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "sec_id")
+    @ManyToOne
+    @JoinColumn(name = "section_id")
     private Section section;
 
-    @Column(name = "post")
+//    @Column(name = "post")
     private String post;
 
     public Employee() {
@@ -112,7 +115,8 @@ public class Employee {
     }
 
     public Department getDepartment() {
-        System.out.println(section.getDepartment().getName());
+//        System.out.println(toString());
+//        System.out.println(section.getDepartment().getName());
         return section.getDepartment();
     }
 

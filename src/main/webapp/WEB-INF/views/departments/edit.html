@@ -11,7 +11,7 @@
     <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
     <br/>
     <label for="director.name">Director: </label>
-    <select th:field="*{director.name}" id="director.name">
+    <select th:field="*{director.id}" id="director.name">
         <option th:each="em : ${employees}"
                 th:text="${em.surname} + ' ' + ${em.name} + ' ' + ${em.patronymic} "
                 th:value="${em.id}">
