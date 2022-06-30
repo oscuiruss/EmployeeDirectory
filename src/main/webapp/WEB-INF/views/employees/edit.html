@@ -27,17 +27,10 @@
     <input type="text" th:field="*{post}" id="post"/>
     <div style="color:red" th:if="${#fields.hasErrors('post')}" th:errors="*{post}">Post Error</div>
     <br/>
-    <label for="section.department.name">Department: </label>
-    <select th:field="*{section.department.name}" id="section.department.name">
-        <option th:each="dep : ${departments}"
-                th:text="${dep.name}"
-                th:value="${dep.id}">
-    </select>
-    <br/>
     <label for="section.name">Section: </label>
-    <select th:field="*{section.name}" id="section.name">
+    <select th:field="*{section}" id="section.name">
         <option th:each="sec : ${sections}"
-                th:text="${sec.name}"
+                th:text="${sec.departmentName} + '. ' +${sec.name}"
                 th:value="${sec.id}">
     </select>
 

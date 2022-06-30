@@ -9,25 +9,35 @@
 <form th:action="@{/employees/create}" th:object="${employee}" th:method="POST">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
+    <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}"></p>
     <br/>
     <label for="patronymic">Enter patronymic: </label>
     <input type="text" th:field="*{patronymic}" id="patronymic"/>
+    <p th:if="${#fields.hasErrors('patronymic')}" th:errorclass="error" th:errors="*{patronymic}"></p>
     <br/>
     <label for="surname">Enter surname: </label>
     <input type="text" th:field="*{surname}" id="surname"/>
+    <p th:if="${#fields.hasErrors('surname')}" th:errorclass="error" th:errors="*{surname}"></p>
     <br/>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email"/>
+    <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
     <br/>
     <label for="post">Enter post: </label>
     <input type="text" th:field="*{post}" id="post"/>
+    <p th:if="${#fields.hasErrors('post')}" th:errorclass="error" th:errors="*{post}"></p>
     <br/>
-    <label for="section.department.name">Enter department: </label>
-    <input type="text" th:field="*{section.department.name}" id="section.department.name"/>
+<!--    <label for="section.department.name">Enter department: </label>-->
+<!--    <input type="text" th:field="*{section.department.name}" id="section.department.name"/>-->
     <br/>
-    <label for="section.name">Enter section: </label>
-    <input type="text" th:field="*{section.name}" id="section.name"/>
+    <label for="section.name">Section: </label>
+    <select th:field="*{section}" id="section.name">
+        <option th:each="sec : ${sections}"
+                th:text="${sec.department.name} + ${sec.name}"
+                th:value="${sec.id}">
+    </select>
     <input type="submit" value="Save"/>
+
 </form>
 <a th:href="@{/employees/new}">Add new employee</a>
 

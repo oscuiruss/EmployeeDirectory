@@ -3,24 +3,24 @@ package com.app.models;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.*;
+
 
 @Entity
 @Table
 public class Department {
     @Id
-//    @Column(name = "dep_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-//    @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade=ALL, mappedBy="department")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private List<Section> sections = new ArrayList<>();
 
-    @OneToOne(cascade=ALL)
+    @OneToOne
     @JoinColumn(name = "dir_id")
     private Employee director;
 
@@ -40,7 +40,7 @@ public class Department {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -63,13 +63,27 @@ public class Department {
     public Employee getDirector() {
         return director;
     }
+//
+//    public String getDirectorName() {
+//        if (Objects.nonNull(this.director)){
+//            return director.getSurname() + " " + director.getName() + " " +  director.getSurname();
+//        }
+//        return "-";
+//    }
+
+    public String getDirectorName() {
+        if (Objects.nonNull(this.director)){
+            return director.getSurname() + " " + director.getName() + " " +  director.getSurname();
+        }
+        return "-";
+    }
 
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", director=" + director.getName() +
+//                ", director=" + director.getName() +
                 '}';
     }
 }

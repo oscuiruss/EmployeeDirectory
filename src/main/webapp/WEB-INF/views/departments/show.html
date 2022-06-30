@@ -9,11 +9,18 @@
 <p th:text=" ${department.getName()}">
     VALUE</p>
 <p  th:text=" 'ID: ' + ${department.getId()}">VALUE</p>
-<p  th:text=" 'Director: ' + ${department.getDirector().getName()}">VALUE</p>
-<!--<p  th:text=" 'Section: ' + ${employee.getSection().getName()}">VALUE</p>-->
-<a th:href="@{/departments/{id}/edit(id=${department.getId()})}">Edit</a>
+<p  th:text=" 'Director: ' + ${department.getDirectorName()}">VALUE</p>
+<br/>
+Sections:
+<div th:each="section : ${sections}">
+    <a th:href="@{/sections/{id}(id=${section.getId()})}" th:text="${section.getName()}">section</a>
+</div>
+<br/>
+<br/>
+<a th:href="@{/departments/{id}/edit(id=${department.getId()})}">Edit department</a>
 &nbsp;&nbsp;&nbsp;
-<a  th:href="@{/departments/delete/{id}(id=${department.getId()})}">Delete</a>
+<a  th:href="@{/departments/delete/{id}(id=${department.getId()})}">Delete department</a>
+
 &nbsp;&nbsp;&nbsp;
 <a  th:href="@{/departments}">All departments</a>
 </body>

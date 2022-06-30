@@ -1,40 +1,35 @@
 package com.app.models;
 
 import org.hibernate.annotations.Cascade;
-//import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table
 public class Employee {
     @Id
-//    @Column(name = "em_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @NotEmpty(message = "Name can't be empty")
     @Size(min = 2, max = 20, message = "Name can't consist of less than 2 and more than 20 letters")
-//    @Column(name = "name")
     private String name;
 
 
     @NotEmpty(message = "Patronymic can't be empty")
     @Size(min = 2, max = 20, message = "Patronymic can't consist of less than 2 and more than 20 letters")
-//    @Column(name = "patronymic")
     private String patronymic;
 
 
     @NotEmpty(message = "Surname can't be empty")
     @Size(min = 2, max = 20, message = "Name can't consist of less than 2 and more than 20 letters")
-//    @Column(name = "surname")
     private String surname;
 
 
-//    @Column(name = "email")
     @NotEmpty(message = "Email can't be empty")
     @Email
     private String email;
@@ -43,7 +38,7 @@ public class Employee {
     @JoinColumn(name = "section_id")
     private Section section;
 
-//    @Column(name = "post")
+    @NotEmpty(message = "Post can't be empty")
     private String post;
 
     public Employee() {
@@ -66,11 +61,11 @@ public class Employee {
         this.post = post;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -115,9 +110,25 @@ public class Employee {
     }
 
     public Department getDepartment() {
-//        System.out.println(toString());
-//        System.out.println(section.getDepartment().getName());
-        return section.getDepartment();
+        if (this.section == null) {
+            return null;
+        } else {
+            return section.getDepartment();
+        }
+    }
+
+    public String getSectionName() {
+        if (Objects.nonNull(this.getSection())){
+            return this.getSection().getName();
+        }
+        return "-";
+    }
+
+    public String getDepartmentName() {
+        if (Objects.nonNull(this.getDepartment())){
+            return this.getDepartment().getName();
+        }
+        return "-";
     }
 
 
@@ -129,8 +140,8 @@ public class Employee {
                 ", patronymic='" + patronymic + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", department='" + section.getDepartment().getName() + '\'' +
-                ", section='" + section.getName() + '\'' +
+//                ", department='" + section.getDepartment().getName() + '\'' +
+// у
                 '}';
     }
 }

@@ -1,11 +1,11 @@
 package com.app.controllers;
 
-import antlr.debug.DebuggingParser;
 //import com.app.dao.DepartmentDAO;
 //import com.app.dao.EmployeeDAO;
 //import com.app.dao.SectionDAO;
 import com.app.models.Employee;
 import com.app.service.EmployeeService;
+import com.app.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +17,13 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
-//    private final EmployeeDAO employeeDAO;
     private final EmployeeService employeeService;
-//    private final SectionDAO sectionDAO;
-//    private final DepartmentDAO departmentDAO;
+    private final SectionService sectionService;
 
     @Autowired
-    EmployeeController( EmployeeService employeeService) {
+    EmployeeController(EmployeeService employeeService,SectionService sectionService) {
         this.employeeService = employeeService;
+        this.sectionService = sectionService;
     }
 
     @GetMapping()
@@ -35,12 +34,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    public String newEmployee(@ModelAttribute("employee") Employee employee) {
+    public String newEmployee(@ModelAttribute("employee") Employee employee, Model model) {
+        model.addAttribute("sections",sectionService.findAll());
         return "employees/new";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") long id, Model model) {
         model.addAttribute("employee", employeeService.findEmployeeById(id));
         return "employees/show";
     }
@@ -59,17 +59,17 @@ public class EmployeeController {
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("employee", employeeService.findEmployeeById(id));
 //        model.addAttribute("departments",departmentDAO.index(""));
-//        model.addAttribute("sections",sectionDAO.index(""));
+        model.addAttribute("sections",sectionService.findSectionByKeyword(""));
         return "employees/edit";
     }
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("employee") @Valid Employee employee,
-                         @PathVariable("id") int id, BindingResult bindingResult) {
+                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "employees/edit";
         }
-        employeeService.update(id, employee);
+        employeeService.save(employee);
         return "redirect:/employees/{id}";
     }
 

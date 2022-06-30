@@ -8,8 +8,8 @@
 <p th:text=" ${section.getName()}">
     VALUE</p>
 <p  th:text=" 'ID: ' + ${section.getId()}">VALUE</p>
+<p  th:text=" 'Director: ' + ${section.getDirectorName()}">VALUE</p>
 <p  th:text=" 'Department: ' + ${section.getDepartment().getName()}">VALUE</p>
-<!--<p  th:text=" 'Section: ' + ${employee.getSection().getName()}">VALUE</p>-->
 <a th:href="@{/sections/{id}/edit(id=${section.getId()})}">Edit</a>
 &nbsp;&nbsp;&nbsp;
 <a  th:href="@{/sections/delete/{id}(id=${section.getId()})}">Delete</a>

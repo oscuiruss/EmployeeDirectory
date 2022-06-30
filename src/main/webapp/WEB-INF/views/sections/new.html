@@ -10,8 +10,18 @@
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
-    <label for="department.name">Enter department: </label>
-    <input type="text" th:field="*{department.name}" id="department.name"/>
+    <label for="director.name">Director: </label>
+    <select th:field="*{director}" id="director.name">
+        <option th:each="employee: ${employees}"
+                th:text="${employee.surname} + ' ' + ${employee.name} + ' ' + ${employee.patronymic}"
+                th:value="${employee.id}">
+    </select>
+    <label for="department.name">Department: </label>
+    <select th:field="*{department}" id="department.name">
+        <option th:each="dep: ${departments}"
+                th:text="${dep.name}"
+                th:value="${dep.id}">
+    </select>
     <br/>
     <input type="submit" value="Save"/>
 </form>

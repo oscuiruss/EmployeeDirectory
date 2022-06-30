@@ -13,7 +13,7 @@
     <label for="director.name">Director: </label>
     <select th:field="*{director.id}" id="director.name">
         <option th:each="em : ${employees}"
-                th:text="${em.surname} + ' ' + ${em.name} + ' ' + ${em.patronymic} "
+                th:text="${em.surname} + ' ' + ${em.name} + ' ' + ${em.patronymic} + '.' + ${em.post}"
                 th:value="${em.id}">
     </select>
     <br/>

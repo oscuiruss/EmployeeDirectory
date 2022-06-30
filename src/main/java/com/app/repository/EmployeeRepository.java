@@ -15,15 +15,12 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findAll();
 
-    Employee findEmployeeById(int id);
+    List<Employee> findAllBySection(Section section);
 
-    @Query(value = "SELECT * FROM employee WHERE lower(concat(name, ' ', patronymic, ' ', surname, ' ', email))"
+    Employee findEmployeeById(long id);
+
+    @Query(value = "SELECT * FROM Employee WHERE lower(concat(name, ' ', patronymic, ' ', surname, ' ', email))"
             + "LIKE lower(concat('%', ?1, '%'))",
             nativeQuery = true)
     List<Employee> findEmployeeByKeyWord(String keyword);
-
-    @Transactional
-    @Modifying
-    @Query(value = "UPDATE user SET name=?2, patronymic=?3, surname=?4, email=?5, post=?6, section=?7 WHERE id=?1", nativeQuery = true)
-    void update(long id, String name, String patronymic, String surname, String email, String post, Section section);
 }
